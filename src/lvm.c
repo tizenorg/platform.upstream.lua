@@ -135,6 +135,7 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
 
 void luaV_settable (lua_State *L, const TValue *t, TValue *key, StkId val) {
   int loop;
+  TValue temp;
   for (loop = 0; loop < MAXTAGLOOP; loop++) {
     const TValue *tm;
     if (ttistable(t)) {  /* `t' is a table? */
@@ -165,7 +166,7 @@ void luaV_settable (lua_State *L, const TValue *t, TValue *key, StkId val) {
     if (ttisfunction(tm)) {
       callTM(L, tm, t, key, val, 0);
       return;
-    }
+
     t = tm;  /* else repeat with 'tm' */
   }
   luaG_runerror(L, "loop in settable");
