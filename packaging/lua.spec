@@ -8,10 +8,6 @@ Group:          System/Libraries
 Source:         %{name}-%{version}.tar.gz
 Source1:        macros.lua
 Source2:        baselibs.conf
-Patch0:         lua51-%{version}-shared.diff
-Patch1:         lua51-%{version}-module-path.diff
-Patch2:         lua51-%{version}-upstream-bugfix.diff
-Patch3:         lua51-%{version}-libdir.diff
 %define major_version 5.1
 BuildRequires:  pkg-config
 BuildRequires:  readline-devel
@@ -80,10 +76,6 @@ simplicity, efficiency, portability, and low embedding cost.
 
 %prep
 %setup -q -n lua-%{version}
-%patch0 -b .shared
-%patch1 -p1
-%patch2
-%patch3 -p1
 
 %build
 sed -i 's:LUA_ROOT2 "LIBDIR/lua/%{major_version}/":LUA_ROOT2 \"%{_lib}/lua/%{major_version}/":' src/luaconf.h
