@@ -1,5 +1,5 @@
 Name:           lua
-Version:        5.1.5
+Version:        5.1.4
 Release:        0
 License:        MIT
 Summary:        Small Embeddable Language with Simple Procedural Syntax
