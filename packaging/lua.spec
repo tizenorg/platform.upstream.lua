@@ -28,7 +28,7 @@ simplicity, efficiency, portability, and low embedding cost.
 
 %package devel
 Summary:        Development files for lua
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 Requires:       %{name} = %{version}
 
 %description devel
@@ -90,9 +90,8 @@ for file in lua luac ; do
 done
 install -d -m 0755 %{buildroot}%{_libdir}/lua/%{major_version}
 install -d -m 0755 %{buildroot}%{_datadir}/lua/%{major_version}
-install -D %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/macros.lua
+install -D -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/macros.lua
 
-#ln -sf liblua.so.%{major_version} %{buildroot}/%{_libdir}/liblua-%{major_version}.so
 chmod +x %{buildroot}/%{_libdir}/liblua.so.%{major_version}
 
 ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
@@ -118,7 +117,6 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 %files -n liblua
 %defattr(-,root,root)
 %{_libdir}/liblua.so.%{major_version}
-###%{_libdir}/liblua-%{major_version}.so
 
 %files devel
 %defattr(-,root,root)
