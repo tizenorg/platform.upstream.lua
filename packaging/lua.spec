@@ -95,6 +95,8 @@ install -D %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/macros.lua
 #ln -sf liblua.so.%{major_version} %{buildroot}/%{_libdir}/liblua-%{major_version}.so
 chmod +x %{buildroot}/%{_libdir}/liblua.so.%{major_version}
 
+ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
+
 %post -n liblua -p /sbin/ldconfig
 
 %postun -n liblua -p /sbin/ldconfig
@@ -104,6 +106,7 @@ chmod +x %{buildroot}/%{_libdir}/liblua.so.%{major_version}
 %doc COPYRIGHT HISTORY README
 %{_mandir}/man1/lua%{major_version}.1*
 %{_mandir}/man1/luac%{major_version}.1*
+%{_bindir}/lua
 %{_bindir}/lua%{major_version}
 %{_bindir}/luac%{major_version}
 %dir %{_libdir}/lua
