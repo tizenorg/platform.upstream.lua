@@ -1,3 +1,7 @@
+* Thu Feb 21 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> 8fc91fd
+- Resolve rpmlint warnings
+- Install a /usr/bin/lua symlink
+
 * Fri Dec 14 2012 Anas Nashif <anas.nashif@intel.com> upstream/5.1.4@c9e8879
 - Update to version 5.1.4
 
