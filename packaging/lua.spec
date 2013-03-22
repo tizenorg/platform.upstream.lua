@@ -4,14 +4,13 @@ Release:        0
 License:        MIT
 Summary:        Small Embeddable Language with Simple Procedural Syntax
 Url:            http://www.lua.org
-Group:          System/Libraries
+Group:          Base/Libraries
 Source:         %{name}-%{version}.tar.gz
 Source1:        macros.lua
 Source2:        baselibs.conf
 %define major_version 5.1
 BuildRequires:  pkg-config
 BuildRequires:  readline-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description
 Lua is a programming language originally designed for extending
@@ -41,7 +40,7 @@ application.
 
 %package -n liblua
 Summary:        Small Embeddable Language with Simple Procedural Syntax
-Group:          System/Libraries
+Group:          Base/Libraries
 
 %description -n liblua
 Lua is a programming language originally designed for extending
@@ -58,7 +57,7 @@ simplicity, efficiency, portability, and low embedding cost.
 
 %package doc
 Summary:        Small Embeddable Language with Simple Procedural Syntax
-Group:          System/Libraries
+Group:          Documentation
 BuildArch:      noarch
 
 %description doc
@@ -102,7 +101,6 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 
 %files
 %defattr(-,root,root)
-%doc COPYRIGHT HISTORY README
 %{_mandir}/man1/lua%{major_version}.1*
 %{_mandir}/man1/luac%{major_version}.1*
 %{_bindir}/lua
@@ -116,6 +114,7 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 
 %files -n liblua
 %defattr(-,root,root)
+%license COPYRIGHT
 %{_libdir}/liblua.so.%{major_version}
 
 %files devel

@@ -1,3 +1,6 @@
+* Fri Mar 22 2013 Anas Nashif <anas.nashif@intel.com> submit/trunk/20121215.004706@978b56f
+- Fixed package groups
+
 * Thu Feb 21 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> 8fc91fd
 - Resolve rpmlint warnings
 - Install a /usr/bin/lua symlink
