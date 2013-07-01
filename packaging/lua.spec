@@ -8,6 +8,7 @@ Group:          Base/Libraries
 Source:         %{name}-%{version}.tar.gz
 Source1:        macros.lua
 Source2:        baselibs.conf
+Source1001: 	lua.manifest
 %define major_version 5.1
 BuildRequires:  pkg-config
 BuildRequires:  readline-devel
@@ -75,6 +76,7 @@ simplicity, efficiency, portability, and low embedding cost.
 
 %prep
 %setup -q -n lua-%{version}
+cp %{SOURCE1001} .
 
 %build
 sed -i 's:LUA_ROOT2 "LIBDIR/lua/%{major_version}/":LUA_ROOT2 \"%{_lib}/lua/%{major_version}/":' src/luaconf.h
@@ -100,6 +102,7 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 %postun -n liblua -p /sbin/ldconfig
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %{_mandir}/man1/lua%{major_version}.1*
 %{_mandir}/man1/luac%{major_version}.1*
@@ -113,11 +116,13 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 %{_sysconfdir}/rpm/macros.lua
 
 %files -n liblua
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %license COPYRIGHT
 %{_libdir}/liblua.so.%{major_version}
 
 %files devel
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %{_includedir}/lauxlib.h
 %{_includedir}/lua.h
@@ -129,6 +134,7 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 %{_libdir}/liblua.so
 
 %files doc
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %doc doc/*
 
