@@ -1,0 +1,9 @@
+Change-Id: Ia8e83a062b895b10c5ac7f505feaca3139b8527b
+Code-Review+2: Ryan Ware <ware@linux.intel.com>
+Verified+1: Ryan Ware <ware@linux.intel.com>
+Code-Review+1: Patrick McCarty <patrick.mccarty@linux.intel.com>
+Submitted-by: Ryan Ware <ware@linux.intel.com>
+Submitted-at: Mon, 08 Jul 2013 09:36:32 -0700
+Reviewed-on: https://review.tizen.org/gerrit/5201
+Project: platform/upstream/lua
+Branch: refs/heads/tizen
