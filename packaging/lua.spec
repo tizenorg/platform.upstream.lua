@@ -8,7 +8,7 @@ Group:          Base/Libraries
 Source:         %{name}-%{version}.tar.gz
 Source1:        macros.lua
 Source2:        baselibs.conf
-Source1001: 	lua.manifest
+Source1001:     lua.manifest
 %define major_version 5.1
 BuildRequires:  pkg-config
 BuildRequires:  readline-devel
@@ -80,7 +80,7 @@ cp %{SOURCE1001} .
 
 %build
 sed -i 's:LUA_ROOT2 "LIBDIR/lua/%{major_version}/":LUA_ROOT2 \"%{_lib}/lua/%{major_version}/":' src/luaconf.h
-make %{?_smp_mflags} -C src CC="%{__cc}" MYCFLAGS="%{optflags} -fPIC -DLUA_USE_LINUX" MYLIBS="-Wl,-E -ldl -lreadline -lhistory -lncurses" V=%{major_version} all
+%__make %{?_smp_mflags} -C src CC="%{__cc}" MYCFLAGS="%{optflags} -fPIC -DLUA_USE_LINUX" MYLIBS="-Wl,-E -ldl -lreadline -lhistory -lncurses" V=%{major_version} all
 
 %install
 make install INSTALL_TOP="%{buildroot}%{_prefix}" INSTALL_LIB="%{buildroot}%{_libdir}" INSTALL_CMOD=%{buildroot}%{_libdir}/lua/%{major_version} INSTALL_MAN="%{buildroot}%{_mandir}/man1"
@@ -95,7 +95,7 @@ install -D -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/macros.lua
 
 chmod +x %{buildroot}/%{_libdir}/liblua.so.%{major_version}
 
-ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
+ln -sf lua%{major_version} %{buildroot}%{_bindir}/lua
 
 %post -n liblua -p /sbin/ldconfig
 
@@ -113,7 +113,7 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 %dir %{_libdir}/lua/%{major_version}
 %dir %{_datadir}/lua
 %dir %{_datadir}/lua/%{major_version}
-%{_sysconfdir}/rpm/macros.lua
+%config %{_sysconfdir}/rpm/macros.lua
 
 %files -n liblua
 %manifest %{name}.manifest
