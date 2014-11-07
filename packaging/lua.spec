@@ -1,5 +1,5 @@
 Name:           lua
-Version:        5.1.4
+Version:        5.2.2
 Release:        0
 License:        MIT
 Summary:        Small Embeddable Language with Simple Procedural Syntax
@@ -9,7 +9,7 @@ Source:         %{name}-%{version}.tar.gz
 Source1:        macros.lua
 Source2:        baselibs.conf
 Source1001: 	lua.manifest
-%define major_version 5.1
+%define major_version 5.2
 BuildRequires:  pkg-config
 BuildRequires:  readline-devel
 
@@ -118,7 +118,7 @@ ln -s lua%{major_version} %{buildroot}%{_bindir}/lua
 %files -n liblua
 %manifest %{name}.manifest
 %defattr(-,root,root)
-%license COPYRIGHT
+##%license COPYRIGHT
 %{_libdir}/liblua.so.%{major_version}
 
 %files devel

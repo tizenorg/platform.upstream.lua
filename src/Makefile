@@ -29,6 +29,7 @@ MYOBJS=
 PLATS= aix ansi bsd freebsd generic linux macosx mingw posix solaris
 
 LUA_A=	liblua.a
+LUA_SO= liblua.so
 CORE_O=	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o \
 	lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o \
 	ltm.o lundump.o lvm.o lzio.o
@@ -43,7 +44,7 @@ LUAC_T=	luac
 LUAC_O=	luac.o
 
 ALL_O= $(BASE_O) $(LUA_O) $(LUAC_O)
-ALL_T= $(LUA_A) $(LUA_T) $(LUAC_T)
+ALL_T= $(LUA_SO) $(LUA_A) $(LUA_T) $(LUAC_T)
 ALL_A= $(LUA_A)
 
 # Targets start here.
@@ -55,15 +56,20 @@ o:	$(ALL_O)
 
 a:	$(ALL_A)
 
+# shared libraries (for Linux)
+$(LUA_SO): $(CORE_O) $(LIB_O)
+	$(CC) -o $(LUA_SO).$V -shared -Wl,-soname,$(LUA_SO).$V $(CORE_O) $(LIB_O) -lm -ldl
+	ln -fs $(LUA_SO).$(V) $(LUA_SO)
+
 $(LUA_A): $(BASE_O)
 	$(AR) $@ $(BASE_O)
 	$(RANLIB) $@
 
 $(LUA_T): $(LUA_O) $(LUA_A)
-	$(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_A) $(LIBS)
+	$(CC) -o $@ $(MYLDFLAGS) $(LUA_O) -L. -llua $(LIBS)
 
 $(LUAC_T): $(LUAC_O) $(LUA_A)
-	$(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_A) $(LIBS)
+	$(CC) -o $@ $(MYLDFLAGS) $(LUAC_O) -L. -llua $(LIBS)
 
 clean:
 	$(RM) $(ALL_T) $(ALL_O)

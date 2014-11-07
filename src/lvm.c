@@ -166,7 +166,7 @@ void luaV_settable (lua_State *L, const TValue *t, TValue *key, StkId val) {
     if (ttisfunction(tm)) {
       callTM(L, tm, t, key, val, 0);
       return;
-
+	}
     t = tm;  /* else repeat with 'tm' */
   }
   luaG_runerror(L, "loop in settable");
