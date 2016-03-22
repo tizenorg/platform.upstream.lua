@@ -163,6 +163,10 @@
 #define LUA_API __declspec(dllimport)
 #endif
 
+#elif defined(LUA_EXPLICIT_VISIBLITY)
+
+#define LUA_API		attribute ((visibility("default"))) extern
+
 #else
 
 #define LUA_API		extern
