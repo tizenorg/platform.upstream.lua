@@ -84,7 +84,7 @@ export CFLAGS+=" -fvisibility=hidden"
   
 export LDFLAGS+=" -Wl,-E -ldl -lreadline -lhistory -lncurses"
 sed -i 's:LUA_ROOT2 "LIBDIR/lua/%{major_version}/":LUA_ROOT2 \"%{_lib}/lua/%{major_version}/":' src/luaconf.h
-make %{?_smp_mflags} -C src CC="%{__cc}" MYCFLAGS="%{optflags} -fPIC -DLUA_USE_LINUX" MYLIBS="$LDFLAGS" V=%{major_version} all
+make %{?_smp_mflags} -C src CC="%{__cc}" MYCFLAGS="%{optflags} -fPIC -DLUA_USE_LINUX -fvisibility=hidden" MYLIBS="$LDFLAGS" V=%{major_version} all
 
 %install
 make install INSTALL_TOP="%{buildroot}%{_prefix}" INSTALL_LIB="%{buildroot}%{_libdir}" INSTALL_CMOD=%{buildroot}%{_libdir}/lua/%{major_version} INSTALL_MAN="%{buildroot}%{_mandir}/man1"
