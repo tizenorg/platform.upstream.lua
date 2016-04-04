@@ -79,6 +79,9 @@ simplicity, efficiency, portability, and low embedding cost.
 cp %{SOURCE1001} .
 
 %build
+export CFLAGS+=" -fvisibility=hidden"
+  export CXXFLAGS+=" -fvisibility=hidden"
+  
 export LDFLAGS+=" -Wl,-E -ldl -lreadline -lhistory -lncurses"
 sed -i 's:LUA_ROOT2 "LIBDIR/lua/%{major_version}/":LUA_ROOT2 \"%{_lib}/lua/%{major_version}/":' src/luaconf.h
 make %{?_smp_mflags} -C src CC="%{__cc}" MYCFLAGS="%{optflags} -fPIC -DLUA_USE_LINUX" MYLIBS="$LDFLAGS" V=%{major_version} all
